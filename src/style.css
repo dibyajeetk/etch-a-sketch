@@ -14,27 +14,30 @@
 /* Artboard */
 #artboard {
     aspect-ratio: 1 / 1;
-    margin: 2rem auto;
+    flex: 1 1 inherit;
+    margin: auto;
     background-color: hsla(0, 0%, 100%, 1);
     box-shadow: 0 6px 8px hsla(0, 0%, 20%, 0.15);
-    border: 1px solid hsla(0, 0%, 70%, 1);
+
+    width: 600px;
+    height: 600px;
 
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
+    overflow: hidden;
 }
 
 .cell {
     aspect-ratio: 1 / 1;
+    flex: 1 1 inherit;
     border: 1px solid hsla(0, 0%, 95%, 1);
-    width: 2rem;
 }
 
 /* toolbar */
 
 #toolbar {
     flex: 1 1 auto;
-    max-width: 40vw;
+    max-width: 35vw;
     /* min-width: 40vh; */
     background-color: hsla(0, 0%, 100%, 1);
     box-shadow: -2px 0 8px hsla(0, 0%, 20%, 0.15);
