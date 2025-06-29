@@ -1,23 +1,40 @@
-let gridCount = 20;
+// get user input
+const inputUI = document.querySelector("#grid-select");
+const confirmBtn = document.querySelector("#confirm-btn");
+
+// artboard
 const artBoardUI = document.querySelector("#artboard");
-
-// store gridCount
-// get length of any side of the #artboard. 
 const artboardSize = artBoardUI.getBoundingClientRect().width; // this is static
-// #cell size = #artboard side(600px) / #gridCount(10). === 600 / 10 => 60px
-let cellSize = artboardSize / gridCount;
-// total number of box = grid count ** 2;
-let cellTotal = gridCount ** 2;
-// run a for loop to create necessary divs(cellUI)
 
+// clear artboard btn
+const ctaButton = document.querySelector("#cta");
 
-for (let i = 0; i < cellTotal; i++) {
-    
-    const cellUI = document.createElement("div")
-    cellUI.setAttribute("class", "cell");
-    cellUI.style.width = `${cellSize}px`;
-    cellUI.style.height = `${cellSize}px`;
-    artBoardUI.appendChild(cellUI);
+confirmBtn.addEventListener("click", () => {
+    let userInput = parseInt(inputUI.value);
+    // if value is < 1 or 100
+    userInput < 1 || userInput > 100 ? alert('fuck you') : gridCreator(userInput);
+});
 
-    console.log(cellUI)
+ctaButton.addEventListener("click", () => {
+    clearGrid();
+})
+
+function gridCreator(value) {
+    value = parseInt(value);
+    let cellSize = artboardSize / value;
+    let cellTotal = value ** 2;
+    // run a for loop to create necessary divs(cellUI)
+    for (let i = 0; i < cellTotal; i++) {
+        const cellUI = document.createElement("div");
+        cellUI.setAttribute("class", "cell");
+        cellUI.style.width = `${cellSize}px`;
+        cellUI.style.height = `${cellSize}px`;
+        artBoardUI.appendChild(cellUI);
+    };
+};
+
+function clearGrid() {
+    while (artBoardUI.firstChild) {
+        artBoardUI.removeChild(artBoardUI.firstChild)
+    }
 }

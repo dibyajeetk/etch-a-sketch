@@ -4,13 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/style.css">
-    <title>Document</title>
+    <title>Etch-a-Sketch</title>
 </head>
 <body>
     <div id="workarea">
         <div id="artboard"></div>
         <div id="toolbar">
             <p id="app-title">etch-a-sketch</p>
+            <div id="controls">
+
+                <!-- Hybrid Input -->
+
+                <div class="dropdown">
+                    <label for="grid-select">Grid size:</label>
+                    <div class="container-row">
+                        <input type="number" min="1" max="100" name="Grid Size" id="grid-select" placeholder="eg. 64">
+                        <ul class="dropdown-option">
+                            <li data-value="16">16 x 16</li>
+                            <li data-value="24">24 x 24</li>
+                            <li data-value="32">32 x 32</li>
+                            <li data-value="64">64 x 64</li>
+                        </ul>
+                        <button id="confirm-btn">Confirm</button>
+                    </div>
+                </div>
+
+                <!-- Three Way Switch -->
+
+                <div id="switch-container">
+                    <p>modes:</p>
+                    <div id="switch">
+                        <button>Randomise</button>
+                        <button>Color</button>
+                        <button>Eraser</button>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div id="footer">
+                    <button id="cta">Clear Artboard</button>
+                </div>
+
+            </div>
+        </div>
         </div>
     </div>
     <script src="./src/script.js" defer></script>

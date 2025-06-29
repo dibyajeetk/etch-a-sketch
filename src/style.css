@@ -9,6 +9,7 @@
    height: 100vh;
    display: flex;
    background-color: hsla(0, 0%, 96%, 1);
+   /* flex-wrap: wrap; */
 }
 
 /* Artboard */
@@ -20,7 +21,8 @@
     box-shadow: 0 6px 8px hsla(0, 0%, 20%, 0.15);
 
     width: 600px;
-    height: 600px;
+    height: auto;
+    
 
     display: flex;
     flex-wrap: wrap;
@@ -29,7 +31,7 @@
 
 .cell {
     aspect-ratio: 1 / 1;
-    flex: 1 1 inherit;
+    flex: 0 0 auto;
     border: 1px solid hsla(0, 0%, 95%, 1);
 }
 
@@ -37,8 +39,176 @@
 
 #toolbar {
     flex: 1 1 auto;
-    max-width: 35vw;
+    min-width: 300px;
+    max-width: 40vw;
     /* min-width: 40vh; */
     background-color: hsla(0, 0%, 100%, 1);
     box-shadow: -2px 0 8px hsla(0, 0%, 20%, 0.15);
+
+    display: flex;
+    flex-direction: column;
+}
+
+#app-title {
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: capitalize;
+    padding: 2rem 2rem 0.8rem 2rem;
+    color: hsla(0, 0%, 20%, 1);
+    border-bottom: 1px solid hsla(0, 0%, 85%, 1);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    gap: 1rem;
+}
+
+#controls {
+    flex: 1 1 auto;
+}
+
+/* dropdown + input */
+
+#grid-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown {
+    position: relative;
+    /* width: 200px; */
+    flex: 1 1 auto;
+
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 2rem 0 2rem;
+}
+
+
+.container-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.dropdown label {
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: hsla(0, 0%, 20%, 1);
+}
+
+.dropdown input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid hsla(0, 0%, 60%, 1);
+    font-size: 16px;
+    color: hsla(0, 0%, 20%, 1);
+}
+
+#grid-select::placeholder{
+    font-size: 16px;
+    color: hsla(0, 0%, 85%, 1);
+}
+
+.dropdown-option {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    display: none;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.dropdown-option.show {
+    display: block;
+}
+
+.dropdown-option li {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.dropdown-options li:hover {
+  background-color: #f0f0f0;
+}
+
+/* three Way switch */
+#switch-container{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 2rem 0 2rem;
+}
+
+p{
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: hsla(0, 0%, 20%, 1);
+}
+
+#switch {
+    background-color: hsla(0, 0%, 85%, 1);
+    border-radius: 6px;
+    display: flex;
+    overflow: hidden;
+    border: 1px solid hsla(0, 0%, 60%, 1);
+    height: auto;
+    padding: 0.25rem;
+}
+
+#switch button {
+    flex: 1 1 auto;
+    padding: auto;
+    font-size: 16px;
+    border: none;
+    color: hsla(0, 0%, 20%, 1);
+    box-shadow: none;
+    border-radius: 0;
+}
+
+/* button style */
+
+button {
+    padding: 0.5rem 2rem;
+    font-size: 16px;
+    color: hsla(0, 0%, 20%, 1);
+    height: 2.5rem;
+    border: 1px solid hsla(0, 0%, 60%, 1);
+    background-color: hsla(0, 0%, 98%, 1);
+    border-radius: 6px;
+    box-shadow: 0 2px 2px hsla(0, 0%, 20%, 0.3);
+}
+button:hover {
+    color: hsla(0, 0%, 30%, 1);
+    background-color: hsla(0, 0%, 100%, 1);
+    box-shadow: 0 6px 8px hsla(0, 0%, 50%, 0.15);
+    border: 1px solid hsla(0, 0%, 50%, 1);
+}
+
+button:active {
+    color: hsla(0, 0%, 20%, 1);
+    background-color: hsla(0, 0%, 96%, 1);
+    box-shadow: inset 0 2px 2px hsla(0, 0%, 20%, 0.6), inset 0 0 2px hsla(0, 0%, 20%, 0.4);
+    border: 1px solid hsla(0, 0%, 60%, 1);
+}
+
+/* footer */
+#footer {
+    flex: 1 1 auto;
+    margin: 2rem;
+}
+
+#footer button {
+    background-color: red;
+    color: hsla(0, 0%, 100%, 1);
 }
