@@ -2,7 +2,8 @@
 const inputUI = document.querySelector("#grid-select");
 const confirmBtn = document.querySelector("#confirm-btn");
 const clearButton = document.querySelector("#clear");
-const modeSwitchUI = Array.from(document.querySelectorAll("#switch button"));
+const modeSwitchUI = Array.from(document.querySelectorAll("#switch span"));
+const toggleUI = Array.from(document.querySelectorAll("#toggle span"));
 const showGridUI = Array.from(document.querySelectorAll("#grid-lines button"));
 
 // artboard
@@ -35,23 +36,22 @@ clearButton.addEventListener("click", () => {
 });
 
 
-// Switch Modes // i was not  able to figue this out as modeSwitchUI is an array
+
 modeSwitchUI.forEach((btn) => {
-    switchModes(btn)
+  btn.addEventListener("click", () => {
+    modeSwitchUI.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
 });
 
-function switchModes(target) {
-    target.addEventListener("click", () =>{
-        target.setAttribute("style", "background-color: white");
-    });
-    target.addEventListener("mouseover", () => {
-        target.setAttribute("style", "background-color: hsla(0, 0%, 97%, 1)");
-    });
-    target.addEventListener("mouseleave", () => {
-        target.setAttribute("style", "background-color: transparent");
-    });
-};
-
+toggleUI.forEach((btn) => {
+    btn.addEventListener("click", ()=> {
+        toggleUI.forEach((i) => {
+            i.classList.remove("active")
+        });
+        btn.classList.add("active");
+    })
+})
 
 // creates grid
 function handleGridInput() {
