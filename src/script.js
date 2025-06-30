@@ -11,6 +11,9 @@ const artBoardUI = document.querySelector("#artboard");
 const artboardSize = artBoardUI.getBoundingClientRect().width; // this is static
 
 
+let isDrawing = false;
+
+
 // event listners
 
 // When app loads
@@ -37,21 +40,6 @@ clearButton.addEventListener("click", () => {
 
 
 
-modeSwitchUI.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    modeSwitchUI.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  });
-});
-
-toggleUI.forEach((btn) => {
-    btn.addEventListener("click", ()=> {
-        toggleUI.forEach((i) => {
-            i.classList.remove("active")
-        });
-        btn.classList.add("active");
-    })
-})
 
 // creates grid
 function handleGridInput() {
@@ -68,7 +56,6 @@ function gridCreator(value) {
     // run a for loop to create necessary divs(cellUI)
     for (let i = 0; i < cellTotal; i++) {
         const cellUI = document.createElement("div");
-        // document.createElement(cellUI)
         cellUI.setAttribute("class", "cell");
         cellUI.style.width = `${cellSize}px`;
         cellUI.style.height = `${cellSize}px`;
@@ -86,34 +73,35 @@ function clearGrid() {
 
 // paint modes //
 
-// random color logic//
-function random(num) {
-    return Math.floor(Math.random() * (num + 1));
-}
-
-function randomColor(element) {
-    const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
-    element.style.backgroundColor = rndCol;
-}
-
-// user defined color logic//
-function userDefColor(element) {
-    element.style.backgroundColor = "#1070ca";
-}
-
-// eraser logic//
-function userEraser(element) {
-    element.style.backgroundColor = 'none';
+function startPainting(element, mode) {
+    if (mode === 'color') {
+        element.style.backgroundColor = "#1070ca"; // <-- need users to define this in UI
+    } else if (mode === 'randomise'){
+        let random = (num) => Math.floor(Math.random() * (num + 1));
+        const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+        element.style.backgroundColor = rndCol;
+    } else {
+        element.style.backgroundColor = 'transparent';
+    }
 };
 
-
 // drawing logic
-let isDrawing = false;
+
+function getSelectedMode() {
+  const active = document.querySelector("#switch .active");
+  return active ? active.textContent.trim().toLowerCase() : null;
+}
+
+modeSwitchUI.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        modeSwitchUI.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+    });
+});
 
 function draw(element) {
     artBoardUI.addEventListener("mousedown", () => {
         isDrawing = true;
-        // console.log(isDrawing);
     });
     artBoardUI.addEventListener("mouseup", () => {
         isDrawing = false;
@@ -124,9 +112,31 @@ function draw(element) {
     artBoardUI.addEventListener("mousemove", (e) => {
         let target = e.target;
         if (isDrawing === true) {
-            console.log(isDrawing);
-            userDefColor(target)
+            // randomColor(target)
+            startPainting(target, getSelectedMode()) // <-- need to fetch the selected mode from switch
         };
     });
-    element.addEventListener('click', () => userDefColor(element));
+    element.addEventListener('click', (e) => {
+        let target = e.target;
+        startPainting(target, getSelectedMode())
+    });
 };
+
+
+function getToggleMode() {
+  const active = document.querySelector("#toggle .active");
+  return active ? active.textContent.trim().toLowerCase() : null;
+}
+
+toggleUI.forEach((btn) => {
+    btn.addEventListener("click", ()=> {
+        toggleUI.forEach((i) => {
+            i.classList.remove("active")
+        });
+        btn.classList.add("active");   
+    });
+})
+
+function toggleGridView() {
+    
+}
