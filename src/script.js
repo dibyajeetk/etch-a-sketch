@@ -3,13 +3,12 @@ const inputUI = document.querySelector("#grid-select");
 const confirmBtn = document.querySelector("#confirm-btn");
 const clearButton = document.querySelector("#clear");
 const modeSwitchUI = Array.from(document.querySelectorAll("#switch button"));
+const showGridUI = Array.from(document.querySelectorAll("#grid-lines button"));
 
 // artboard
 const artBoardUI = document.querySelector("#artboard");
 const artboardSize = artBoardUI.getBoundingClientRect().width; // this is static
 
-// user defined value
-// userValue = inputUI.value;
 
 // event listners
 
@@ -31,9 +30,10 @@ inputUI.addEventListener("keydown", (e) => {
 
 // Clear Artboard button
 clearButton.addEventListener("click", () => {
-    clearGrid();
-    inputUI.value = '';
+    // clearGrid();
+    handleGridInput();
 });
+
 
 // Switch Modes // i was not  able to figue this out as modeSwitchUI is an array
 modeSwitchUI.forEach((btn) => {
@@ -58,8 +58,7 @@ function handleGridInput() {
     let userInput = parseInt(inputUI.value);
     // if value is < 1 or 100
     userInput < 2 || userInput > 100 || isNaN(userInput) ? alert('Invalid Grid Size') : gridCreator(userInput);
-}
-// const cellUI = document.createElement("div");
+};
 
 function gridCreator(value) {
     clearGrid();
@@ -74,7 +73,7 @@ function gridCreator(value) {
         cellUI.style.width = `${cellSize}px`;
         cellUI.style.height = `${cellSize}px`;
         artBoardUI.appendChild(cellUI);
-        hoverListener(cellUI);
+        draw(cellUI);
     };
 };
 
@@ -83,13 +82,11 @@ function clearGrid() {
     while (artBoardUI.firstChild) {
         artBoardUI.removeChild(artBoardUI.firstChild) ///did not understood this piece of code
     };
-    
-    // gridCreator(userValue)
 }
 
 // paint modes //
 
-// random color //
+// random color logic//
 function random(num) {
     return Math.floor(Math.random() * (num + 1));
 }
@@ -99,16 +96,37 @@ function randomColor(element) {
     element.style.backgroundColor = rndCol;
 }
 
-// user defined //
+// user defined color logic//
 function userDefColor(element) {
-    // value = 
+    element.style.backgroundColor = "#1070ca";
 }
 
-// eraser //
+// eraser logic//
+function userEraser(element) {
+    element.style.backgroundColor = 'none';
+};
 
-// hover listner
-function hoverListener (element) {
-    element.addEventListener("mouseover", () =>{
-        randomColor(element)
+
+// drawing logic
+let isDrawing = false;
+
+function draw(element) {
+    artBoardUI.addEventListener("mousedown", () => {
+        isDrawing = true;
+        // console.log(isDrawing);
     });
-}
+    artBoardUI.addEventListener("mouseup", () => {
+        isDrawing = false;
+    });
+
+    element.addEventListener("dragstart", e => e.preventDefault());
+    
+    artBoardUI.addEventListener("mousemove", (e) => {
+        let target = e.target;
+        if (isDrawing === true) {
+            console.log(isDrawing);
+            userDefColor(target)
+        };
+    });
+    element.addEventListener('click', () => userDefColor(element));
+};
