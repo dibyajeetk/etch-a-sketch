@@ -50,7 +50,7 @@ function switchModes(target) {
     target.addEventListener("mouseleave", () => {
         target.setAttribute("style", "background-color: transparent");
     });
-}
+};
 
 
 // creates grid
