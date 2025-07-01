@@ -32,6 +32,11 @@
 .cell {
     aspect-ratio: 1 / 1;
     flex: 0 0 auto;
+}
+
+.cellBorder {
+    aspect-ratio: 1 / 1;
+    flex: 0 0 auto;
     border: 1px solid hsla(0, 0%, 30%, 0.1);
 }
 
@@ -192,7 +197,7 @@ p{
 }
 
 #switch, #toggle{
-    background-color: hsla(0, 0%, 92%, 1);
+    background-color: hsla(0, 0%, 97%, 1);
     border-radius: 6px;
     display: flex;
     overflow: hidden;
@@ -223,6 +228,15 @@ span {
 .active {
     background-color: hsla(0, 0%, 100%, 1);
     color: hsla(0, 0%, 20%, 1);
+    font-weight: 500;
+    box-shadow: 0 0px 6px hsla(0, 0%, 20%, 0.3);
+    border-radius: 3px;
+}
+
+/* toggle and switch */
+#toggle span, #switch span {
+    cursor: pointer;
+    user-select: none;
 }
 
 /* button style */
@@ -251,6 +265,12 @@ button:active {
     border: 1px solid hsla(0, 0%, 60%, 1);
 }
 
+button:disabled {
+    color: hsla(0, 0%, 50%, 1);
+    background-color: hsla(0, 0%, 96%, 1);
+    border: 1px solid hsla(0, 0%, 60%, 1);
+}
+
 /* footer */
 #footer {
     flex: 1 1 auto;
@@ -260,6 +280,7 @@ button:active {
     max-height: 4rem;
     /* box-shadow: 0 -2px 4px hsla(0, 0%, 20%, 0.15); */
     border-top: 1px solid hsla(0, 0%, 85%, 1);
+    background-color: hsla(0, 0%, 100%, 1);
 }
 
 

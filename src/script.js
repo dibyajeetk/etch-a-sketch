@@ -12,14 +12,17 @@ const artboardSize = artBoardUI.getBoundingClientRect().width; // this is static
 
 
 let isDrawing = false;
+let cells = [];
 
 
 // event listners
 
-// When app loads
+// When app loads State management
 document.addEventListener("DOMContentLoaded", () => {
     gridCreator(32);
     inputUI.value = '32';
+    modeSwitchUI[0].setAttribute("class", "active");
+    toggleUI[1].setAttribute("class", "active");
 });
 
 // Clicking Confirm Button
@@ -38,13 +41,9 @@ clearButton.addEventListener("click", () => {
     handleGridInput();
 });
 
-
-
-
 // creates grid
 function handleGridInput() {
     let userInput = parseInt(inputUI.value);
-    // if value is < 1 or 100
     userInput < 2 || userInput > 100 || isNaN(userInput) ? alert('Invalid Grid Size') : gridCreator(userInput);
 };
 
@@ -62,6 +61,10 @@ function gridCreator(value) {
         artBoardUI.appendChild(cellUI);
         draw(cellUI);
     };
+    cells = Array.from(artBoardUI.querySelectorAll("div"));
+    if (getToggleMode() === "yes") {
+        cells.forEach(cell => cell.classList.add("cellBorder"));
+    }
 };
 
 // clears grid
@@ -131,12 +134,16 @@ function getToggleMode() {
 toggleUI.forEach((btn) => {
     btn.addEventListener("click", ()=> {
         toggleUI.forEach((i) => {
-            i.classList.remove("active")
+            i.classList.remove("active");
         });
-        btn.classList.add("active");   
+        btn.classList.add("active");
+        const mode = getToggleMode();
+            cells.forEach(cell => {
+            if (mode === "yes") {
+            cell.classList.add("cellBorder");
+        } else {
+            cell.classList.remove("cellBorder");
+        }
+        });
     });
-})
-
-function toggleGridView() {
-    
-}
+});
